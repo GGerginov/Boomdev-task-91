@@ -21,7 +21,13 @@ export default class Application extends EventEmitter {
 
         this.emit(Application.events.READY);
 
-        this.on(Beat.events.BIT,this._create(lyrics[count++]))
+        this._beat.on(Beat.events.BIT,()=>{
+            count++;
+
+            if (count <=5){
+                this._create(lyrics[count])
+            }
+        })
     }
 
     _create(text) {
